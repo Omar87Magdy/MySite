@@ -1,36 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Omar Magdy Hassan - Cybersecurity Specialist</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        .flip-card {
+            perspective: 1000px;
+            height: 400px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slideIn {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+        .dark {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        .dark .bg-white {
+            background-color: #2d2d2d;
+            color: #ffffff;
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Navigation -->
+<body class="bg-gray-50 transition-colors duration-200">
+    <!-- Navigation with Dark Mode Toggle -->
     <nav class="bg-gray-900 fixed w-full z-50">
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <a href="#" class="text-white font-bold text-xl">OMH</a>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="text-gray-300 hover:text-white transition">About</a>
-                    <a href="#expertise" class="text-gray-300 hover:text-white transition">Expertise</a>
-                    <a href="#projects" class="text-gray-300 hover:text-white transition">Projects</a>
-                    <a href="#certifications" class="text-gray-300 hover:text-white transition">Certifications</a>
-                    <a href="#contact" class="text-gray-300 hover:text-white transition">Contact</a>
+                <div class="flex items-center space-x-8">
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#about" class="text-gray-300 hover:text-white transition">About</a>
+                        <a href="#expertise" class="text-gray-300 hover:text-white transition">Expertise</a>
+                        <a href="#projects" class="text-gray-300 hover:text-white transition">Projects</a>
+                        <a href="#certifications" class="text-gray-300 hover:text-white transition">Certifications</a>
+                        <a href="#contact" class="text-gray-300 hover:text-white transition">Contact</a>
+                    </div>
+                    <button id="darkModeToggle" class="text-white">
+                        <i class="fas fa-moon"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Typing Effect -->
     <header class="bg-gradient-to-r from-gray-900 to-blue-900 text-white pt-32 pb-20">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl">
                 <h1 class="text-5xl font-bold mb-4">Omar Magdy Hassan</h1>
-                <p class="text-2xl mb-6 text-blue-300">Cybersecurity Specialist</p>
-                <p class="text-gray-300 text-lg max-w-2xl mb-8">Securing digital assets through advanced penetration testing, threat intelligence, and robust security solutions. Committed to staying ahead of emerging cyber threats.</p>
+                <p class="text-2xl mb-6 text-blue-300">
+                    <span id="typed"></span>
+                </p>
+                <p class="text-gray-300 text-lg max-w-2xl mb-8">Securing digital assets through advanced penetration testing, threat intelligence, and robust security solutions.</p>
                 <div class="flex space-x-4">
                     <a href="#contact" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition">Get in Touch</a>
                     <a href="#projects" class="border border-blue-600 hover:bg-blue-600/10 px-6 py-3 rounded-lg font-semibold transition">View Projects</a>
@@ -39,178 +88,129 @@
         </div>
     </header>
 
-    <!-- Stats Section -->
+    <!-- Animated Stats Section -->
     <div class="bg-white shadow-lg transform -translate-y-16 mx-auto max-w-5xl rounded-lg">
         <div class="grid md:grid-cols-4 gap-8 p-8">
             <div class="text-center">
-                <p class="text-4xl font-bold text-blue-600">4+</p>
+                <p class="text-4xl font-bold text-blue-600"><span class="counter" data-target="4">0</span>+</p>
                 <p class="text-gray-600">Major Certifications</p>
             </div>
             <div class="text-center">
-                <p class="text-4xl font-bold text-blue-600">3+</p>
+                <p class="text-4xl font-bold text-blue-600"><span class="counter" data-target="3">0</span>+</p>
                 <p class="text-gray-600">Years Experience</p>
             </div>
             <div class="text-center">
-                <p class="text-4xl font-bold text-blue-600">10+</p>
+                <p class="text-4xl font-bold text-blue-600"><span class="counter" data-target="10">0</span>+</p>
                 <p class="text-gray-600">Security Tools</p>
             </div>
             <div class="text-center">
-                <p class="text-4xl font-bold text-blue-600">3</p>
+                <p class="text-4xl font-bold text-blue-600"><span class="counter" data-target="3">0</span></p>
                 <p class="text-gray-600">Major Projects</p>
             </div>
         </div>
     </div>
 
-    <!-- Expertise Section -->
-    <section id="expertise" class="py-20 bg-white">
+    <!-- Skills Radar Chart -->
+    <section class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center">Areas of Expertise</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition">
-                    <div class="text-blue-600 mb-4">
-                        <i class="fas fa-shield-alt text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Network Security</h3>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>• Firewall Configuration</li>
-                        <li>• IDS/IPS Implementation</li>
-                        <li>• VPN Setup & Management</li>
-                        <li>• Network Monitoring</li>
-                    </ul>
-                </div>
-                <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition">
-                    <div class="text-blue-600 mb-4">
-                        <i class="fas fa-bug text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Penetration Testing</h3>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>• Vulnerability Assessment</li>
-                        <li>• Exploit Development</li>
-                        <li>• Security Auditing</li>
-                        <li>• Risk Analysis</li>
-                    </ul>
-                </div>
-                <div class="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition">
-                    <div class="text-blue-600 mb-4">
-                        <i class="fas fa-laptop-code text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Security Development</h3>
-                    <ul class="space-y-2 text-gray-600">
-                        <li>• Custom Security Tools</li>
-                        <li>• Automation Scripts</li>
-                        <li>• Security Integration</li>
-                        <li>• API Security</li>
-                    </ul>
-                </div>
+            <h2 class="text-3xl font-bold mb-12 text-center">Skills Overview</h2>
+            <div class="max-w-2xl mx-auto">
+                <canvas id="skillsRadar"></canvas>
             </div>
         </div>
     </section>
 
-    <!-- Skills Matrix -->
-    <section class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center">Technical Proficiency</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="space-y-6">
-                    <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold">Network Security</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="h-2 bg-gray-200 rounded">
-                            <div class="h-2 bg-blue-600 rounded" style="width: 95%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold">Penetration Testing</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="h-2 bg-gray-200 rounded">
-                            <div class="h-2 bg-blue-600 rounded" style="width: 90%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold">Python Programming</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="h-2 bg-gray-200 rounded">
-                            <div class="h-2 bg-blue-600 rounded" style="width: 85%"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="space-y-6">
-                    <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold">Digital Forensics</span>
-                            <span>88%</span>
-                        </div>
-                        <div class="h-2 bg-gray-200 rounded">
-                            <div class="h-2 bg-blue-600 rounded" style="width: 88%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold">Incident Response</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="h-2 bg-gray-200 rounded">
-                            <div class="h-2 bg-blue-600 rounded" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold">Security Frameworks</span>
-                            <span>92%</span>
-                        </div>
-                        <div class="h-2 bg-gray-200 rounded">
-                            <div class="h-2 bg-blue-600 rounded" style="width: 92%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-white">
+    <!-- Interactive Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-12 text-center">Featured Projects</h2>
+            
+            <!-- Project Filter -->
+            <div class="flex justify-center space-x-4 mb-12">
+                <button class="filter-btn active px-4 py-2 rounded-lg bg-blue-600 text-white" data-filter="all">All</button>
+                <button class="filter-btn px-4 py-2 rounded-lg bg-gray-200" data-filter="security">Security</button>
+                <button class="filter-btn px-4 py-2 rounded-lg bg-gray-200" data-filter="development">Development</button>
+                <button class="filter-btn px-4 py-2 rounded-lg bg-gray-200" data-filter="mobile">Mobile</button>
+            </div>
+
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="bg-blue-600 h-2"></div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-4">Network Penetration Testing ToolKit</h3>
-                        <p class="text-gray-600 mb-4">Advanced security testing suite featuring automated vulnerability assessment and detailed reporting capabilities.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Python</span>
-                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Network Security</span>
-                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Automation</span>
+                <!-- Project Card 1 -->
+                <div class="flip-card" data-category="security">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-white rounded-lg shadow-lg p-6">
+                            <div class="bg-blue-600 h-2 mb-4"></div>
+                            <h3 class="text-xl font-bold mb-4">Network Penetration Testing ToolKit</h3>
+                            <p class="text-gray-600">Click to see more details</p>
+                        </div>
+                        <div class="flip-card-back bg-blue-900 text-white rounded-lg shadow-lg p-6">
+                            <h3 class="text-xl font-bold mb-4">Project Details</h3>
+                            <ul class="space-y-2">
+                                <li>• Automated vulnerability scanning</li>
+                                <li>• Custom exploit development</li>
+                                <li>• Detailed reporting system</li>
+                                <li>• Risk assessment tools</li>
+                            </ul>
+                            <div class="mt-4">
+                                <h4 class="font-bold mb-2">Technologies:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-blue-800 rounded-full text-sm">Python</span>
+                                    <span class="px-3 py-1 bg-blue-800 rounded-full text-sm">Network Security</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="bg-blue-600 h-2"></div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-4">Weather Mobile Application</h3>
-                        <p class="text-gray-600 mb-4">Full-stack weather application with real-time updates and secure API integration using Flutter framework.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Flutter</span>
-                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">API Security</span>
-                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Mobile Dev</span>
+
+                <!-- Project Card 2 -->
+                <div class="flip-card" data-category="mobile">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-white rounded-lg shadow-lg p-6">
+                            <div class="bg-blue-600 h-2 mb-4"></div>
+                            <h3 class="text-xl font-bold mb-4">Weather Mobile Application</h3>
+                            <p class="text-gray-600">Click to see more details</p>
+                        </div>
+                        <div class="flip-card-back bg-blue-900 text-white rounded-lg shadow-lg p-6">
+                            <h3 class="text-xl font-bold mb-4">Project Details</h3>
+                            <ul class="space-y-2">
+                                <li>• Real-time weather updates</li>
+                                <li>• Location-based services</li>
+                                <li>• Secure API integration</li>
+                                <li>• Offline functionality</li>
+                            </ul>
+                            <div class="mt-4">
+                                <h4 class="font-bold mb-2">Technologies:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-blue-800 rounded-full text-sm">Flutter</span>
+                                    <span class="px-3 py-1 bg-blue-800 rounded-full text-sm">API Security</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="bg-blue-600 h-2"></div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-4">Electronic Invoice System</h3>
-                        <p class="text-gray-600 mb-4">Secure electronic invoicing platform integrated with EGYtaxe portal, featuring encrypted data transmission.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">.NET</span>
-                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Security</span>
-                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Integration</span>
+
+                <!-- Project Card 3 -->
+                <div class="flip-card" data-category="development">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-white rounded-lg shadow-lg p-6">
+                            <div class="bg-blue-600 h-2 mb-4"></div>
+                            <h3 class="text-xl font-bold mb-4">Electronic Invoice System</h3>
+                            <p class="text-gray-600">Click to see more details</p>
+                        </div>
+                        <div class="flip-card-back bg-blue-900 text-white rounded-lg shadow-lg p-6">
+                            <h3 class="text-xl font-bold mb-4">Project Details</h3>
+                            <ul class="space-y-2">
+                                <li>• Secure document handling</li>
+                                <li>• EGYtaxe integration</li>
+                                <li>• Automated workflows</li>
+                                <li>• Audit logging</li>
+                            </ul>
+                            <div class="mt-4">
+                                <h4 class="font-bold mb-2">Technologies:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-blue-800 rounded-full text-sm">.NET</span>
+                                    <span class="px-3 py-1 bg-blue-800 rounded-full text-sm">Security</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -218,39 +218,43 @@
         </div>
     </section>
 
-    <!-- Certifications Section -->
-    <section id="certifications" class="py-20 bg-gray-50">
+    <!-- Interactive Contact Form -->
+    <section id="contact" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center">Professional Certifications</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100 hover:border-blue-500 transition">
-                    <div class="text-blue-600 mb-4">
-                        <i class="fas fa-certificate text-3xl"></i>
+            <h2 class="text-3xl font-bold mb-12 text-center">Get in Touch</h2>
+            <div class="max-w-2xl mx-auto">
+                <form id="contactForm" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Name</label>
+                            <input type="text" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition" required>
+                        </div>
                     </div>
-                    <h3 class="font-bold mb-2">EC-CTIA</h3>
-                    <p class="text-sm text-gray-600">EC Council Certified Threat Intelligence Analyst</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100 hover:border-blue-500 transition">
-                    <div class="text-blue-600 mb-4">
-                        <i class="fas fa-certificate text-3xl"></i>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Subject</label>
+                        <input type="text" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition" required>
                     </div>
-                    <h3 class="font-bold mb-2">CISCO CyberOps</h3>
-                    <p class="text-sm text-gray-600">CISCO Academy Certification</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100 hover:border-blue-500 transition">
-                    <div class="text-blue-600 mb-4">
-                        <i class="fas fa-certificate text-3xl"></i>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Message</label>
+                        <textarea rows="5" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition" required></textarea>
                     </div>
-                    <h3 class="font-bold mb-2">HCIA Security</h3>
-                    <p class="text-sm text-gray-600">Huawei Certified ICT Associate Security</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100 hover:border-blue-500 transition">
-                    <div class="text-blue-600 mb-4">
-                        <i class="fas fa-certificate text-3xl"></i>
-                    </div>
-                    <h3 class="font-bold mb-2">CISCO CCNA</h3>
-                    <p class="text-sm text-gray-600">Cisco Certified Network Associate</p>
-                </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">Send Message</button>
+                </form>
             </div>
         </div>
     </section>
+
+    <!-- Live Chat Widget -->
+    <div id="chatWidget" class="fixed bottom-6 right-6 z-50">
+        <button id="chatToggle" class="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div id="chatBox" class="hidden absolute bottom-16 right-0 w-80 bg-white rounded-lg shadow-xl">
+            <div class="p-4 bg-blue-600 text-white rounded-t-lg">
+                <h3 class="font-bold">Live Chat</h3>
+            </div>
+            <div class="h-80 p-4 overflow-y-
